@@ -8,11 +8,14 @@ from src.LoginScreen import LoginScreen
 from src.DashboardScreen import DashboardScreen
 
 def main(stdscr):
-    curses.curs_set(0)
+    curses.curs_set(1)
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_RED)
+    curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
+    curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK)
     sh, sw = stdscr.getmaxyx()
     loginScreen = LoginScreen(stdscr)
     loginScreen.restart()
+    curses.curs_set(0)
     dashboardScreen = DashboardScreen(stdscr)
     dashboardScreen.restart()
 

@@ -21,6 +21,8 @@ class LoginScreen:
     def restart(self, faulty = False):
         self.passwordInput = PasswordInput(self.stdscr, 3,40, math.floor(self.sh/2), math.floor(self.sw/2), "Enter master key", faulty)
         self.draw()
+        curses.curs_set(1)
+
         self.passwordInput.listen() # waits until enter is pressed
         self.attempt(self.passwordInput.gather())
     

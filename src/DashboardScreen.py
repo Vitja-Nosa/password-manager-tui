@@ -17,4 +17,6 @@ class DashboardScreen:
         while 1:
             key = self.stdscr.getch()
             if key == 47:
+                self.searchInput.active = True
+                self.searchInput.draw()
                 self.searchInput.listen()

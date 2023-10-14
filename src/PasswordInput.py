@@ -20,8 +20,8 @@ class PasswordInput:
         for i in range(0, len(self.__password)):
             hidden_password += 'x'
         self.window.addstr(1,1, hidden_password)
-        self.window.refresh()
         if self.faulty:
+            curses.curs_set(0)
             self.faulty = False
             msg = " WRONG KEY "
             self.window.addstr(1,1, msg, curses.color_pair(1))
@@ -31,7 +31,7 @@ class PasswordInput:
             for i in range(0, len(msg)):
                 empty_str += " "
             self.window.addstr(1,1, empty_str)
-            self.window.refresh()
+        self.window.refresh()
 
     def listen(self):
         while 1:
