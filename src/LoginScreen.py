@@ -18,10 +18,10 @@ class LoginScreen:
             self.stdscr.refresh()
             self.passwordInput.draw()
 
-    def restart(self, faulty = False):
-        self.passwordInput = PasswordInput(self.stdscr, 3,40, math.floor(self.sh/2), math.floor(self.sw/2), "Enter master key", faulty)
-        self.draw()
+    def restart(self):
         curses.curs_set(1)
+        self.passwordInput = PasswordInput(self.stdscr, 3,40, math.floor(self.sh/2), math.floor(self.sw/2), "Enter master key")
+        self.draw()
 
         self.passwordInput.listen() # waits until enter is pressed
         self.attempt(self.passwordInput.gather())
@@ -29,9 +29,9 @@ class LoginScreen:
     def attempt(self, password):
         if self.compareKey(password):
             self.destroy()
-            
         else:
-            self.restart(True)
+            self.passwordInput.drawWrongKey()
+            self.restart()
     
     def destroy(self):
         self.stdscr.clear()

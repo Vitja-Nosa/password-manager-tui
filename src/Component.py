@@ -3,7 +3,6 @@ import curses
 class Component:
     def draw_border(self):
         sh, sw = self.window.getmaxyx()
-
         color = curses.color_pair(3)
         if self.active:
             color = curses.color_pair(2)
