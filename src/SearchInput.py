@@ -9,8 +9,7 @@ class SearchInput(Component):
         self.wh, self.ww = self.window.getmaxyx()
         self.query = ""
         self.max_length = width-4
-        self.title = title
-        self.active = False
+        super().__init__(self.window, title, False, False)
 
     def draw(self):
         self.window.clear()
@@ -28,7 +27,10 @@ class SearchInput(Component):
                 curses.curs_set(0)
                 self.active = False
                 self.draw()
-                break
+                if key == 27:
+                    return False
+                else:
+                    return self.query
             elif chr(key) in "".join(chr(x) for x in range(32,127)) and len(self.query) < self.max_length:
                 self.query += chr(key)
             self.draw()

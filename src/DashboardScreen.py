@@ -7,13 +7,14 @@ class DashboardScreen:
 
     def restart(self):
         self.searchInput = SearchInput(self.stdscr, 3, 50, 0,0, 'Search')
-        self.ResultBox = ResultBox(self.stdscr, 100, 50, 0,0, 'Result')
+        self.ResultBox = ResultBox(self.stdscr, 10, 50, 3,0, 'Result')
         self.draw()
         self.listen()
         
     def draw(self):
         self.stdscr.clear()
         self.searchInput.draw()
+        self.ResultBox.draw()
 
     def listen(self):
         while 1:
@@ -21,4 +22,7 @@ class DashboardScreen:
             if key == 47:
                 self.searchInput.active = True
                 self.searchInput.draw()
-                self.searchInput.listen()
+                query = self.searchInput.listen()
+                if query:
+                    self.ResultBox.query = query
+                    self.ResultBox.draw()
