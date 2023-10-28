@@ -34,3 +34,11 @@ class Component:
         self.window.addstr(self.sh-1,0, "└", color)
         self.window.addstr(self.sh-1,self.sw-2, "┘", color)
         self.window.addstr(0,1, self.title, color)
+
+    def focus(self):
+        self.active = True
+        self.draw()
+    
+    def unfocus(self):
+        self.active = False
+        self.draw()

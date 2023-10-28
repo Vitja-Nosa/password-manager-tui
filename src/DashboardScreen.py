@@ -8,6 +8,7 @@ class DashboardScreen:
     def restart(self):
         self.searchInput = SearchInput(self.stdscr, 3, 50, 0,0, 'Search')
         self.ResultBox = ResultBox(self.stdscr, 10, 50, 3,0, 'Result')
+        self.hoverComp = self.ResultBox
         self.draw()
         self.listen()
         
@@ -19,9 +20,11 @@ class DashboardScreen:
     def listen(self):
         while 1:
             key = self.stdscr.getch()
-            if key == 47:
-                self.searchInput.active = True
-                self.searchInput.draw()
+            if key == 10:
+                self.hoverComp.focus()
+                self.hoverComp.listen()
+            elif key == 47:
+                self.searchInput.focus()
                 query = self.searchInput.listen()
                 if query:
                     self.ResultBox.query = query

@@ -18,15 +18,14 @@ class SearchInput(Component):
         self.window.refresh()
 
     def listen(self):
+        self.active = True
         while 1:
             key = self.window.getch()
-            print(key)
             if key == 8 and len(self.query) > 0:
                 self.query = self.query[:-1]
-            elif key == 10 or key == 27:
+            elif key == 10 or key == 27: # 10:enter, 27:esc
                 curses.curs_set(0)
-                self.active = False
-                self.draw()
+                self.unfocus()
                 if key == 27:
                     return False
                 else:
