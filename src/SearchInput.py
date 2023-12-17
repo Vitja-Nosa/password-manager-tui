@@ -23,9 +23,10 @@ class SearchInput(Component):
             key = self.window.getch()
             if key == 8 and len(self.query) > 0:
                 self.query = self.query[:-1]
+            #this elif needs to be split up into two elifs because enter does something else than esc
             elif key == 10 or key == 27: # 10:enter, 27:esc
                 curses.curs_set(0)
-                self.unfocus()
+                self.deactivate()
                 if key == 27:
                     return False
                 else:

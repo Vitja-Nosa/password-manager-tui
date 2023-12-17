@@ -3,6 +3,9 @@ import math
 from curses import textpad
 from src.PasswordInput import PasswordInput
 from hashlib import sha256 as hashValue
+from src.SecretManager import put_in_key
+
+global master_key
 
 class LoginScreen:
     def __init__(self, stdscr):
@@ -22,12 +25,14 @@ class LoginScreen:
         curses.curs_set(1)
         self.passwordInput = PasswordInput(self.stdscr, 3,40, math.floor(self.sh/2), math.floor(self.sw/2), "Enter master key")
         self.draw()
-
         self.passwordInput.listen() # waits until enter is pressed
         self.attempt(self.passwordInput.gather())
+
     
     def attempt(self, password):
         if self.compareKey(password):
+            print('hello')
+            self.master_key = password
             self.destroy()
         else:
             self.passwordInput.drawWrongKey()
@@ -42,6 +47,5 @@ class LoginScreen:
         f = open('masterkey', 'r')
         l = f.readline()
         f.close() 
-        # return l == key_hashed
-        return True
-    
+        return l == key_hashed
+        # return True
